@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import { MaterialModule } from '@angular/material';
 import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 //import { HeaderComponent } from './header/header.component';
@@ -11,12 +13,18 @@ import { MainmenuComponent } from './mainmenu/mainmenu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
+import { LoginComponent } from './auth/login/login.component';
+import { UsersComponent } from './users/users.component';
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     //HeaderComponent,
     //SidemenuComponent,
-    MainmenuComponent
+    MainmenuComponent,
+    LoginComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +35,11 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    AppRoutingModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     //MatButtonModule,

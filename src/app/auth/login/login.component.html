@@ -1,0 +1,31 @@
+<section class="login-form">
+  <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <mat-form-field>
+      <input 
+        type="text" 
+        matInput 
+        placeholder="UserName" 
+        ngModel 
+        name="userName"
+        #loginUserName="ngModel"
+        required
+        minlength="5">
+      <mat-error *ngIf="loginUserName.hasError('required')">UserName must not be empty</mat-error>
+      <mat-error *ngIf="!loginUserName.hasError('required')">Should be at least 5 characters long</mat-error>
+    </mat-form-field>    
+    <mat-form-field>
+      <input 
+        type="password" 
+        matInput 
+        placeholder="Password" 
+        ngModel 
+        name="password"
+        #loginPassword="ngModel"
+        required
+        minlength="5">
+      <mat-error *ngIf="loginPassword.hasError('required')">Password must not be empty</mat-error>
+      <mat-error *ngIf="!loginPassword.hasError('required')">Should be at least 5 characters long</mat-error>
+    </mat-form-field>    
+    <button type="submit" mat-raised-button color="primary">Login</button>
+  </form>
+</section>
