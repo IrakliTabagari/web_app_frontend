@@ -16,15 +16,22 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { LoginComponent } from './auth/login/login.component';
 import { UsersComponent } from './users/users.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ApplicationModule } from './application/application.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     //HeaderComponent,
     //SidemenuComponent,
-    MainmenuComponent,
-    LoginComponent,
-    UsersComponent
+    //MainmenuComponent,
+    LoginComponent//,
+    //UsersComponent,
+    //SidenavComponent,
+    //HeaderComponent,
+    //FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ApplicationModule
   ],
   exports:[
     //MatButtonModule,

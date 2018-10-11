@@ -18,15 +18,15 @@ export class AppComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(this.isLogedIn == true /* && this.router.url == '/login' */){
-      console.log("User is Loged in");
-      console.log(this.router.url);
-      this.router.navigate(['/app']);
-    }
-    else{
-      console.log("User is not Loged in");
-      console.log(this.router.url);
-      this.router.navigate(['/login']);
-    }
-   }
+  //   if(this.isLogedIn == true /* && this.router.url == '/login' */){
+  //     console.log("User is Loged in");
+  //     console.log(this.router.url);
+  //     this.router.navigate(['/app']);
+  //   }
+  //   else{
+  //     console.log("User is not Loged in");
+  //     console.log(this.router.url);
+  //     this.router.navigate(['/login']);
+  //   }
+  }
 }
