@@ -11,6 +11,8 @@ import { FooterComponent } from '../footer/footer.component';
 
 import { UsersModule } from '../users/users.module';
 
+import { SidenavService } from '../sidenav/sidenav.service'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { UsersModule } from '../users/users.module';
     HeaderComponent,
     FooterComponent,
     SidenavComponent
-  ]
+  ],
+  providers: [SidenavService],
 })
 export class ApplicationModule { }

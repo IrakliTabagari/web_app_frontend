@@ -3,16 +3,13 @@
     #sidenav
     class="sidenav"
     fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    role="navigation">
     <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="sidenav.toggle()"
-        *ngIf="isHandset$ | async">
+        (click)="sidenav.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="spaceBefore">MENU</span> 

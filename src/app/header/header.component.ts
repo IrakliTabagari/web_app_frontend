@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-//import { MaterialModule } from '../material.module';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { SidenavService } from '../sidenav/sidenav.service'
 
 @Component({
   selector: 'application-header',
@@ -7,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    
 
-  constructor() { }
+  constructor(private sidenav: SidenavService) {}
 
   ngOnInit() {
   }
 
+  toggleActive:boolean = false;
+  
+  toggleSidenav() {
+    this.toggleActive = !this.toggleActive;
+		this.sidenav.toggle();
+
+    console.log('Clicked');
+  }
 }
