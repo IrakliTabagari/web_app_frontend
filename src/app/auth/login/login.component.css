@@ -9,3 +9,7 @@ mat-form-field{
 .mat-form-field-placeholder {
     display:block !important;
 }
+
+.loginForm{
+    width: 320px
+}

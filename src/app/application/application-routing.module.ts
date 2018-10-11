@@ -4,12 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 // import { LoginComponent } from './auth/login/login.component'
 import { ApplicationComponent } from './application.component'
 import { UsersComponent } from '../users/users.component'
+import { UsersModule } from '../users/users.module'
 
 const routes: Routes =[
-    {   path: '', component: ApplicationComponent,
+    {   
+        path: '', component: ApplicationComponent,
         children: [
-            {path: 'users', component: UsersComponent}//,
-            //{path: 'users', component: UsersComponent}
+            { path: 'users', loadChildren: () => UsersModule }
         ]
     }
 ];

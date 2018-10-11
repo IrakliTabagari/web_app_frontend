@@ -9,14 +9,14 @@ import { HeaderComponent } from '../header/header.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { FooterComponent } from '../footer/footer.component';
 
-import { UsersModule } from '../users/users.module';
+//import { UsersModule } from '../users/users.module';
 
 import { SidenavService } from '../sidenav/sidenav.service'
 
 @NgModule({
   imports: [
     CommonModule,
-    UsersModule,
+    //UsersModule,
     ApplicationRoutingModule,
     MaterialModule
   ],
