@@ -19,7 +19,5 @@ export class HeaderComponent implements OnInit {
   toggleSidenav() {
     this.toggleActive = !this.toggleActive;
 		this.sidenav.toggle();
-
-    console.log('Clicked');
   }
 }
