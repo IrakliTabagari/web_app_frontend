@@ -1,17 +1,37 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    #drawer
+    #sidenav
     class="sidenav"
     fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="spaceBefore">MENU</span> 
+    </mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item href="#">Users</a>
-      <a mat-list-item href="#">Products</a>
-      <a mat-list-item href="#">Clients</a>
+      <!-- <a mat-list-item routerLink="/users" (click)="sidenav.close()">  -->
+      <a mat-list-item (click)="sidenav.close()"> 
+        <mat-icon>group</mat-icon> 
+        <span class="spaceBefore">Users</span> 
+      </a>
+      <a mat-list-item (click)="sidenav.close()">
+          <mat-icon>shop_two</mat-icon> 
+          <span class="spaceBefore">Products</span> 
+        </a>
+      <a mat-list-item (click)="sidenav.close()">
+        <mat-icon>insert_chart</mat-icon> 
+        <span class="spaceBefore">Reports</span> 
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -22,7 +42,7 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="sidenav.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -30,7 +50,7 @@
       <span>web-app-frontend</span>
       <span class="spacer"></span>
 
-      <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu" class="example-header-image"></button>
+      <button mat-mini-fab flex="33" color="primary" [matMenuTriggerFor]="menu" class="example-header-image"></button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon>perm_identity</mat-icon>
@@ -43,6 +63,10 @@
         <button mat-menu-item>
           <mat-icon>settings</mat-icon>
           <span>Settings</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Log Out</span>
         </button>
       </mat-menu>
     </mat-toolbar>

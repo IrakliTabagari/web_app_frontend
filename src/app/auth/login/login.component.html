@@ -26,6 +26,6 @@
       <mat-error *ngIf="loginPassword.hasError('required')">Password must not be empty</mat-error>
       <mat-error *ngIf="!loginPassword.hasError('required')">Should be at least 5 characters long</mat-error>
     </mat-form-field>    
-    <button type="submit" mat-raised-button color="primary">Login</button>
+    <button type="submit" mat-raised-button color="primary"><mat-icon>input</mat-icon> Login</button>
   </form>
 </section>
