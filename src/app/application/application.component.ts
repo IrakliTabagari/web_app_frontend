@@ -18,7 +18,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.sidenavService.setSidenav(this.sidenav);
+    console.log("from application "+JSON.parse(window.localStorage.getItem('AppSession')));
   }
 
 }

@@ -13,14 +13,14 @@ import { Session } from './session';
 })
 export class LoginComponent implements OnInit {
   
-  @Input() parent;
+ // @Input() parent;
 
   constructor(private http: Http, private router: Router) { 
     
   }
 
   ngOnInit() {
-    if(this.parent == true) this.router.navigate(['/app']);
+    //if(this.parent == true) this.router.navigate(['/app']);
    }
 
   httpOptions = {
@@ -35,23 +35,23 @@ export class LoginComponent implements OnInit {
     'password' : ""
   };
 
+  session: Session;
   onSubmit(form: NgForm){
     this.login = {
       'userName' : form.value.userName,
       'password' : form.value.password
     };
-
+    
     this.http.post("http://localhost:3000/api/users/login", this.login)
       .subscribe(response => {
-        console.log(response);
+        this.session = response.json();        
+        console.log(this.session);
+        window.localStorage.setItem('AppSession',  JSON.stringify(this.session))
+        if(this.session && this.session._id){
+          //this.parent = true;
+          this.router.navigate(['/app']);
+        }
       });
-
-    console.log(form.value);
-    // if(form.value.userName == "admin" && form.value.password == "admin"){
-    //   this.parent = true;
-    //   this.router.navigate(['/app']);
-    // }
-    
   }
 
 }
