@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {Router} from "@angular/router";
 import {Http } from '@angular/http';
-import { HttpHeaders } from '@angular/common/http';
+import { Headers } from '@angular/http';
 
 import { Session } from './session';
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
    }
 
   httpOptions = {
-    headers: new HttpHeaders({
+    headers: new Headers({
       'Content-Type':  'application/json'//,
      // 'Authorization': 'my-auth-token'
     })
@@ -44,19 +44,16 @@ export class LoginComponent implements OnInit {
       'password' : form.value.password
     };
     
-    this.http.post("http://localhost:3000/api/users/login", this.login)
+    this.http.post("http://localhost:3000/api/users/login", this.login, this.httpOptions)
       .subscribe(response => {
         this.session = response.json();        
         console.log(this.session);
         window.localStorage.setItem('AppSession',  JSON.stringify(this.session))
 
         if(this.session && this.session._id){
-          //this.parent = true;
           this.router.navigate(['/app']);
-          console.log("asddsa");
         }else{
           this.loginStatus = response.json().warning;
-          console.log(this.loginStatus + response.json().warning);
         }
       });
   }

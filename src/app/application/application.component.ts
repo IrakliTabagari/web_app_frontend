@@ -18,7 +18,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("from application "+JSON.parse(window.localStorage.getItem('AppSession')));
+    console.log(JSON.parse(window.localStorage.getItem('AppSession')));
   }
 
 }

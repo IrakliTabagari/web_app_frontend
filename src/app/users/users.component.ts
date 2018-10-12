@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
+import {Http } from '@angular/http';
+import { Headers } from '@angular/http';
+
+import { Session } from '../auth/login/session';
+import { User } from '../auth/login/user';
+
 export interface UserData {
   id: string;
   name: string;
@@ -29,7 +35,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private http: Http) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -37,7 +43,23 @@ export class UsersComponent implements OnInit {
     this.dataSource = new MatTableDataSource(users);
   }
 
+  session: Session = JSON.parse(window.localStorage.getItem('AppSession'));
+  users: User[];
+  httpOptions = {
+    headers: new Headers({
+      'Content-Type':  'application/json',
+      'sessionId': this.session._id.toString(),
+      'userName': this.session.user.userName.toString(),
+    })
+  };
+
   ngOnInit() {
+    this.http.get("http://localhost:3000/api/users", this.httpOptions)
+    .subscribe(response => {
+      this.users = response.json();        
+      //console.log(this.users);
+    });
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
