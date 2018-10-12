@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   };
 
   session: Session;
+  loginStatus: String;
+  
   onSubmit(form: NgForm){
     this.login = {
       'userName' : form.value.userName,
@@ -47,9 +49,14 @@ export class LoginComponent implements OnInit {
         this.session = response.json();        
         console.log(this.session);
         window.localStorage.setItem('AppSession',  JSON.stringify(this.session))
+
         if(this.session && this.session._id){
           //this.parent = true;
           this.router.navigate(['/app']);
+          console.log("asddsa");
+        }else{
+          this.loginStatus = response.json().warning;
+          console.log(this.loginStatus + response.json().warning);
         }
       });
   }
