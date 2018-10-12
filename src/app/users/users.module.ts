@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component'
+import { UsersComponent } from './users.component';
+import { UsersService } from './users.service';
 
 
 
@@ -15,6 +16,9 @@ import { UsersComponent } from './users.component'
   ],
   declarations: [
     UsersComponent
+  ],
+  providers:[
+    UsersService
   ]
 })
 export class UsersModule { }
