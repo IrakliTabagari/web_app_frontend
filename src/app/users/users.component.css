@@ -7,10 +7,22 @@ table {
     width: 90%;
   }
   
-  td, th {
-    width: 25%;
+  .content-td, .content-th {
+    width: 30%;
+  }
+
+  .content-edit, .content-delete {
+    width: 5%;
   }
 
 .filter{
-    width: 33%;
+    width: 40%;
+}
+
+tr.table-row-hover:not(.example-expanded-row):hover {
+  background: #E7E5F0;
+}
+
+.add-user-spacer{
+  flex: 1 1 auto;
 }

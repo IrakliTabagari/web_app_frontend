@@ -1,39 +1,21 @@
 
+
 <mat-card>
-  <mat-toolbar color="primary" class="userToolbar">
+  <mat-toolbar color="primary" class="userToolbar">   
     <mat-toolbar-row>
-      <span>Filter</span>
+      <div class="filter">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>    
+
+      <span class="add-user-spacer"></span>
+      <button mat-mini-fab color="basic" (click)="addUserDialog()">
+        <mat-icon color="primary">person_add</mat-icon>
+      </button>
     </mat-toolbar-row> 
-
-    <mat-toolbar-row>
-    <!-- <div class="filter">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ID">
-      </mat-form-field>
-    </div> -->
-
-    <div class="filter">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Name">
-      </mat-form-field>
-    </div>
-
-    <div class="filter">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Progress">
-      </mat-form-field>
-    </div>
-
-    <div class="filter">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Color">
-      </mat-form-field>
-    </div>
-  </mat-toolbar-row> 
   </mat-toolbar>
-</mat-card>    
 
-<mat-card>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -45,24 +27,42 @@
 
       <!-- Progress Column -->
       <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> userName </th>
-        <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
+        <th class="content-th" mat-header-cell *matHeaderCellDef mat-sort-header> userName </th>
+        <td class="content-td" mat-cell *matCellDef="let row"> {{row.userName}} </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> state </th>
-        <td mat-cell *matCellDef="let row"> {{row.state.name}} </td>
+        <th class="content-th" mat-header-cell *matHeaderCellDef mat-sort-header> state </th>
+        <td class="content-td" mat-cell *matCellDef="let row"> {{row.state.name}} </td>
       </ng-container>
 
       <!-- Color Column -->
-      <ng-container matColumnDef="e-mail">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> e-mail </th>
-        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      <ng-container matColumnDef="email">
+        <th class="content-th" mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+        <td class="content-td" mat-cell *matCellDef="let row"> {{row.email}} </td>
       </ng-container>
 
+      <ng-container  matColumnDef="edit">
+        <th class="content-edit" mat-header-cell *matHeaderCellDef> edit </th>
+        <td class="content-edit" mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary">
+            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container  matColumnDef="delete">
+          <th class="content-delete" mat-header-cell *matHeaderCellDef> delete </th>
+          <td class="content-delete" mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary">
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-hover">
       </tr>
     </table>
 

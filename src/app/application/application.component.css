@@ -1,0 +1,21 @@
+/* application-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+ } */
+
+
+.html-content, .body-content {
+    height: 100%;
+  }
+.body-content {
+    display: flex;
+    flex-direction: column;
+}
+.main-content {
+flex: 1 0 auto;
+}
+application-footer {
+    flex-shrink: 0;
+}

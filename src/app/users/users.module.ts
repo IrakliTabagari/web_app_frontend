@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component';
+import { UsersComponent, AddUserDialogComponent } from './users.component';
 import { UsersService } from './users.service';
+
+import { FormsModule }   from '@angular/forms';
 
 
 
@@ -12,10 +14,16 @@ import { UsersService } from './users.service';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
+  ],
+  entryComponents: [
+    AddUserDialogComponent, 
+    AddUserDialogComponent
   ],
   declarations: [
-    UsersComponent
+    UsersComponent,
+    AddUserDialogComponent
   ],
   providers:[
     UsersService

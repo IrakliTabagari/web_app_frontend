@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material';
+import { NgForm } from '@angular/forms';
 
-import {Http } from '@angular/http';
+//import {Http } from '@angular/http';
 import { Headers } from '@angular/http';
 
 import { Session } from '../auth/login/session';
@@ -30,13 +32,13 @@ import { UsersService } from './users.service';
 export class UsersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['userName', 'status', 'e-mail'];
+  displayedColumns: string[] = ['userName', 'status', 'email', 'edit', 'delete'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UsersService, public dialog: MatDialog) {
   }
 
   session: Session = JSON.parse(window.localStorage.getItem('AppSession'));
@@ -67,19 +69,29 @@ export class UsersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  addUserDialog() {
+    const dialogRef = this.dialog.open(AddUserDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
 
-/** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name =
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'add-user-dialog.component.html',
+  styleUrls: ['add-user-dialog.component.css']
+})
+export class AddUserDialogComponent {
 
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-//   };
+  user: User;
 
-// }
+  onSubmit(form: NgForm){
+    this.user.userName = form.value.userName;
+    this.user.password = form.value.password;
+  }
+}
+
+
