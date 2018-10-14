@@ -23,6 +23,10 @@ tr.table-row-hover:not(.example-expanded-row):hover {
   background: #E7E5F0;
 }
 
-.add-user-spacer{
+.add-user-spacer {
   flex: 1 1 auto;
+}
+
+.users-list-tools {
+  margin:5px;
 }

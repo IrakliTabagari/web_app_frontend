@@ -5,6 +5,8 @@ import { MaterialModule } from '../material.module';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
 import { UsersService } from './users.service';
 
 import { FormsModule }   from '@angular/forms';
@@ -20,11 +22,14 @@ import { FormsModule }   from '@angular/forms';
   ],
   entryComponents: [
     AddUserDialogComponent, 
-    AddUserDialogComponent
+    DeleteUserDialogComponent,
+    StatusSnackbarComponent
   ],
   declarations: [
     UsersComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    DeleteUserDialogComponent,
+    StatusSnackbarComponent
   ],
   providers:[
     UsersService

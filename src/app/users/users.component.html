@@ -8,14 +8,14 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-
+      
       <span class="add-user-spacer"></span>
-      <button mat-mini-fab color="basic" (click)="refreshUsers()">
-        <mat-icon color="primary">refresh</mat-icon>
-      </button>
-      <button mat-mini-fab color="basic" (click)="addUserDialog()">
-        <mat-icon color="primary">person_add</mat-icon>
-      </button>
+        <button mat-mini-fab color="basic" class="users-list-tools" (click)="refreshUsers()">
+          <mat-icon color="primary">refresh</mat-icon>
+        </button>
+        <button mat-mini-fab color="basic" class="users-list-tools" (click)="addUserDialog()">
+          <mat-icon color="primary">person_add</mat-icon>
+        </button>
     </mat-toolbar-row> 
   </mat-toolbar>
 
@@ -58,7 +58,7 @@
       <ng-container  matColumnDef="delete">
           <th class="content-delete" mat-header-cell *matHeaderCellDef> delete </th>
           <td class="content-delete" mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click)="deleteUserDialog()">
               <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
             </button>
           </td>

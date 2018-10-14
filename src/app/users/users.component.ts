@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import { NgForm } from '@angular/forms';
 
 //import {Http } from '@angular/http';
@@ -11,6 +12,8 @@ import { User } from '../auth/login/user';
 import { UsersService } from './users.service';
 
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
 
 // export interface UserData {
 //   id: string;
@@ -40,7 +43,10 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UsersService, public dialog: MatDialog) {
+  constructor(private userService: UsersService, 
+              public dialog: MatDialog, 
+              public snackBar: MatSnackBar
+              ) {
   }
 
   session: Session = JSON.parse(window.localStorage.getItem('AppSession'));
@@ -80,6 +86,21 @@ export class UsersComponent implements OnInit {
       });
   }
 
+  deleteUserDialog(selectedUser) {
+    const dialogRef = this.dialog.open(DeleteUserDialogComponent);
+    console.log(`Selected User: ${selectedUser}`);
+    dialogRef.componentInstance.userName = selectedUser.userName;
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if(result == "true"){
+          this.userService.deleteUser(selectedUser._id);
+          this.refreshUsers(); 
+        }
+        console.log(`Dialog result: ${selectedUser}`);
+      });
+  }
+
   refreshUsers(){
     this.userService.getUsers()
       .subscribe(response => {
@@ -88,9 +109,19 @@ export class UsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.openSnackBar("Users Refreshed");
       });    
   }
+
+  openSnackBar(message: string) {
+    this.snackBar.openFromComponent(StatusSnackbarComponent, {
+      data: message,
+      duration: 2000,
+    });
+  }
 }
+
+
 
 
 
