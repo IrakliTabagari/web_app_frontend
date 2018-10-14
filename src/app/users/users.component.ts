@@ -10,6 +10,8 @@ import { Session } from '../auth/login/session';
 import { User } from '../auth/login/user';
 import { UsersService } from './users.service';
 
+import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+
 // export interface UserData {
 //   id: string;
 //   name: string;
@@ -52,14 +54,7 @@ export class UsersComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe(response => {
-        this.users = response.json();        
-        //console.log(this.users);
-        this.dataSource = new MatTableDataSource(this.users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });    
+    this.refreshUsers();  
   }
 
   applyFilter(filterValue: string) {
@@ -70,28 +65,33 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  newUser: User;
+
   addUserDialog() {
     const dialogRef = this.dialog.open(AddUserDialogComponent);
+    
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        this.newUser = dialogRef.componentInstance.newUser; //result;//.json();
+        if(this.newUser._id && this.newUser._id !== ""){
+          this.refreshUsers(); 
+        }
+        console.log(`Dialog result: ${this.newUser}`);
+      });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  refreshUsers(){
+    this.userService.getUsers()
+      .subscribe(response => {
+        this.users = response.json();        
+        //console.log(this.users);
+        this.dataSource = new MatTableDataSource(this.users);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });    
   }
 }
 
-@Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'add-user-dialog.component.html',
-  styleUrls: ['add-user-dialog.component.css']
-})
-export class AddUserDialogComponent {
 
-  user: User;
-
-  onSubmit(form: NgForm){
-    this.user.userName = form.value.userName;
-    this.user.password = form.value.password;
-  }
-}
 
 

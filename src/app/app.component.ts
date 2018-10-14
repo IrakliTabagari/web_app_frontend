@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
+import { Session } from './auth/login/session';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,16 +19,11 @@ export class AppComponent implements OnInit {
     this.instance = this;
    }
 
+  session: Session;
   ngOnInit() {
-  //   if(this.isLogedIn == true /* && this.router.url == '/login' */){
-  //     console.log("User is Loged in");
-  //     console.log(this.router.url);
-  //     this.router.navigate(['/app']);
-  //   }
-  //   else{
-  //     console.log("User is not Loged in");
-  //     console.log(this.router.url);
-  //     this.router.navigate(['/login']);
-  //   }
+    this.session = JSON.parse(window.localStorage.getItem('AppSession'));
+    if(!this.session || new Date(this.session.endDate) < new Date()){
+      this.router.navigate(['/login']);
+    }
   }
 }

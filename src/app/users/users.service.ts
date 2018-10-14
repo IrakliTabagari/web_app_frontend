@@ -31,7 +31,7 @@ export class UsersService {
     return this.http.get(this.url+'/'+id, this.httpOptions);
   }
 
-  addtUser(newUser: User){
+  addUser(newUser: User){
     return this.http.post(this.url, newUser, this.httpOptions);
   }
 

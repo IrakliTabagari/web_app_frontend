@@ -5,6 +5,7 @@ import {Http } from '@angular/http';
 import { Headers } from '@angular/http';
 
 import { Session } from './session';
+//import { User } from './user';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,13 @@ export class LoginComponent implements OnInit {
     
   }
 
+  session: Session;
+
   ngOnInit() {
-    //if(this.parent == true) this.router.navigate(['/app']);
+    this.session = JSON.parse(window.localStorage.getItem('AppSession'));
+    if(this.session && new Date(this.session.endDate) > new Date()){
+      this.router.navigate(['/app']);
+    }
    }
 
   httpOptions = {
@@ -35,7 +41,7 @@ export class LoginComponent implements OnInit {
     'password' : ""
   };
 
-  session: Session;
+  newSession: Session;
   loginStatus: String;
   
   onSubmit(form: NgForm){
@@ -46,11 +52,11 @@ export class LoginComponent implements OnInit {
     
     this.http.post("http://localhost:3000/api/users/login", this.login, this.httpOptions)
       .subscribe(response => {
-        this.session = response.json();        
-        console.log(this.session);
-        window.localStorage.setItem('AppSession',  JSON.stringify(this.session))
+        this.newSession = response.json();        
+        console.log(this.newSession);
+        window.localStorage.setItem('AppSession',  JSON.stringify(this.newSession))
 
-        if(this.session && this.session._id){
+        if(this.newSession && this.newSession._id){
           this.router.navigate(['/app']);
         }else{
           this.loginStatus = response.json().warning;
