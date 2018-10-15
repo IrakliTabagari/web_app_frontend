@@ -59,8 +59,12 @@ export class UsersComponent implements OnInit {
     })
   };
 
+  rights: String[] = [];
   ngOnInit() {
-    this.refreshUsers();  
+    this.refreshUsers(); 
+    this.session.user.rights.forEach(right => {
+      this.rights.push(right.name.toString());
+    }) 
   }
 
   applyFilter(filterValue: string) {
