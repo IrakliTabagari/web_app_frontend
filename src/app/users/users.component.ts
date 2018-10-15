@@ -86,18 +86,23 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  deleteUserDialog(selectedUser) {
+  deletedUser:User;
+  deleteUserDialog(userId) {
+    this.deletedUser = this.users.find(obj => obj._id == userId);;
     const dialogRef = this.dialog.open(DeleteUserDialogComponent);
-    console.log(`Selected User: ${selectedUser}`);
-    dialogRef.componentInstance.userName = selectedUser.userName;
+    console.log(`Selected User: ${this.deletedUser._id}`);
+    dialogRef.componentInstance.userName = this.deletedUser.userName;
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        if(result == "true"){
-          this.userService.deleteUser(selectedUser._id);
-          this.refreshUsers(); 
-        }
-        console.log(`Dialog result: ${selectedUser}`);
+        if(result == true){
+          this.userService.deleteUser(userId)
+          .subscribe(response => {
+            this.deletedUser = response.json();
+            this.openSnackBar(`${this.deletedUser.userName} was deleted`);            
+            this.refreshUsers(); 
+          });
+        }       
       });
   }
 

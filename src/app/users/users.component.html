@@ -58,7 +58,7 @@
       <ng-container  matColumnDef="delete">
           <th class="content-delete" mat-header-cell *matHeaderCellDef> delete </th>
           <td class="content-delete" mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="deleteUserDialog()">
+            <button mat-icon-button color="primary" (click)="deleteUserDialog(row._id)">
               <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
             </button>
           </td>
