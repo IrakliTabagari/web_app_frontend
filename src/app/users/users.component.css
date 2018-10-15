@@ -30,3 +30,7 @@ tr.table-row-hover:not(.example-expanded-row):hover {
 .users-list-tools {
   margin:5px;
 }
+
+.inactive{
+  color: #FF0000;
+}
