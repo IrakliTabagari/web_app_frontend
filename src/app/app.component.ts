@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
   session: Session;
   ngOnInit() {
+    //window.localStorage.removeItem('AppSession');
     this.session = JSON.parse(window.localStorage.getItem('AppSession'));
     if(!this.session || new Date(this.session.endDate) < new Date()){
       this.router.navigate(['/login']);
