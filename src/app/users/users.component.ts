@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
 
 // export interface UserData {
@@ -76,13 +77,26 @@ export class UsersComponent implements OnInit {
   }
 
   newUser: User;
-
   addUserDialog() {
     const dialogRef = this.dialog.open(AddUserDialogComponent);
     
     dialogRef.afterClosed()
       .subscribe(result => {
         this.newUser = dialogRef.componentInstance.newUser; //result;//.json();
+        if(this.newUser._id && this.newUser._id !== ""){
+          this.refreshUsers(); 
+        }
+        console.log(`Dialog result: ${this.newUser}`);
+      });
+  }
+
+  editUserDialog(userId) {
+    const dialogRef = this.dialog.open(EditUserDialogComponent);
+    dialogRef.componentInstance.userId = userId;
+    
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        this.newUser = dialogRef.componentInstance.user; //result;//.json();
         if(this.newUser._id && this.newUser._id !== ""){
           this.refreshUsers(); 
         }

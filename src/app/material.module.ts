@@ -14,7 +14,7 @@ import {
     MatDividerModule,
     MatExpansionModule,
     MatGridListModule,
-    MatIconModule,
+   // MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
@@ -37,6 +37,8 @@ import {
     MatTooltipModule,
     MatTreeModule,
 } from '@angular/material';
+
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     imports: [

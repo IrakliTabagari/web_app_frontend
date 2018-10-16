@@ -1,0 +1,61 @@
+<mat-toolbar color="primary">   
+    <mat-toolbar-row>
+        <h2 mat-dialog-title>add new User</h2>
+    </mat-toolbar-row> 
+</mat-toolbar>
+<mat-dialog-content>
+    <mat-card>
+    <section class="login-form">
+        <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <mat-form-field>
+                <input 
+                    type="text" 
+                    matInput 
+                    placeholder="UserName" 
+                    ngModel 
+                    name="newUserUserName"
+                    #userName="ngModel"
+                    required
+                    minlength="5">
+                <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error>
+            </mat-form-field>  
+            <p></p>  
+            <mat-form-field>
+                <input 
+                    type="password" 
+                    matInput 
+                    placeholder="Password" 
+                    ngModel 
+                    name="newUserPassword"
+                    #password="ngModel"
+                    required
+                    minlength="5">
+                <mat-error *ngIf="password.hasError('required')">Password must not be empty</mat-error>
+                <mat-error *ngIf="!password.hasError('required')">Should be at least 5 characters long</mat-error>
+            </mat-form-field>
+            <p></p>  
+            <mat-form-field>
+                <input 
+                    type="email" 
+                    matInput 
+                    placeholder="email" 
+                    ngModel 
+                    name="newUserEmail"
+                    #email="ngModel"
+                    required
+                    minlength="5">
+                <mat-error *ngIf="email.hasError('required')">Password must not be empty</mat-error>
+                <mat-error *ngIf="!email.hasError('required')">Should be at least 5 characters long</mat-error>
+            </mat-form-field>
+            <p></p> 
+            <button type="submit" mat-raised-button color="primary"><mat-icon>how_to_reg</mat-icon> Create</button>
+            <mat-error *ngIf="loginStatus">{{loginStatus}}</mat-error>
+        </form>
+    </section>
+</mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+  <button mat-raised-button [mat-dialog-close]="user" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

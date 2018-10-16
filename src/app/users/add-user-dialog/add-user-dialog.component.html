@@ -16,7 +16,8 @@
                     name="newUserUserName"
                     #newUserUserName="ngModel"
                     required
-                    minlength="5">
+                    minlength="5"
+                    [disabled]="addSuccess">
                 <mat-error *ngIf="newUserUserName.hasError('required')">UserName must not be empty</mat-error>
                 <mat-error *ngIf="!newUserUserName.hasError('required')">Should be at least 5 characters long</mat-error>
             </mat-form-field>  
@@ -30,7 +31,8 @@
                     name="newUserPassword"
                     #newUserPassword="ngModel"
                     required
-                    minlength="5">
+                    minlength="5"
+                    [disabled]="addSuccess">
                 <mat-error *ngIf="newUserPassword.hasError('required')">Password must not be empty</mat-error>
                 <mat-error *ngIf="!newUserPassword.hasError('required')">Should be at least 5 characters long</mat-error>
             </mat-form-field>
@@ -44,13 +46,16 @@
                     name="newUserEmail"
                     #newUserEmail="ngModel"
                     required
-                    minlength="5">
+                    minlength="5"
+                    [disabled]="addSuccess">
                 <mat-error *ngIf="newUserEmail.hasError('required')">Password must not be empty</mat-error>
                 <mat-error *ngIf="!newUserEmail.hasError('required')">Should be at least 5 characters long</mat-error>
             </mat-form-field>
             <p></p> 
-            <button type="submit" mat-raised-button color="primary"><mat-icon>how_to_reg</mat-icon> Create</button>
-            <mat-error *ngIf="loginStatus">{{loginStatus}}</mat-error>
+            <button type="submit" mat-raised-button color="primary" [disabled]="addSuccess"><mat-icon>done_outline</mat-icon> Create</button>
+            <p></p> 
+            <mat-error *ngIf="addError">{{addError}}</mat-error>
+            <mat-hint *ngIf="addSuccess">{{addSuccess}}</mat-hint>
         </form>
     </section>
 </mat-card>

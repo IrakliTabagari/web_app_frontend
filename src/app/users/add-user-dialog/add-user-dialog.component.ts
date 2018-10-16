@@ -34,6 +34,8 @@ import { UsersService } from '../users.service';
     };
 
   
+    addError:String;
+    addSuccess:String;
     onSubmit(form: NgForm){
       this.newUser.userName = form.value.newUserUserName;
       this.newUser.password = form.value.newUserPassword;
@@ -44,6 +46,10 @@ import { UsersService } from '../users.service';
       .subscribe(response => {
         this.newUser = response.json();
         console.log(this.newUser);
+        this.addError = "";
+        this.addSuccess = this.newUser.userName.toString() + " was added succesfully";
+      },error => {
+        this.addError = error.json().warning;
       });
     }
   }

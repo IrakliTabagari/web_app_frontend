@@ -49,7 +49,7 @@
       <ng-container matColumnDef="edit">
         <th class="content-edit" mat-header-cell *matHeaderCellDef> edit </th>
         <td class="content-edit" mat-cell *matCellDef="let row">
-          <button [disabled]="!rights || !rights.includes('updateUser')"  mat-icon-button color="primary">
+          <button [disabled]="!rights || !rights.includes('updateUser')"  mat-icon-button color="primary" (click)="editUserDialog(row._id)">
             <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
           </button>
         </td>

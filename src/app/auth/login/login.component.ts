@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
         }else{
           this.loginStatus = response.json().warning;
         }
+      }, error => {
+        this.loginStatus = error.json().warning;
       });
   }
 
