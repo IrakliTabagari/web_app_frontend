@@ -72,16 +72,28 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
 
     editError: String;
     editSuccess: String;
-    onSubmit(form: NgForm){
-      this.user.userName = form.value.userName;
-      this.user.password = form.value.password;
-      this.user.email = form.value.email;
+    updateUser(form: NgForm){
+      this.user.userName = this.userName;
+      this.user.password = this.password;
+      this.user.email = this.email;
       console.log(this.user);
       
-      this.userService.addUser(this.user)
+      this.userService.updatetUser(this.user)
         .subscribe(response => {
         this.user = response.json();
         console.log(this.user);
+      },error => {
+        this.editError = error.json().warning;
+      });
+
+      this.userService.updateUserRights(this.user)
+        .subscribe(response => {
+        this.user = response.json();
+        console.log(this.user);
+        this.usersRights = new MatTableDataSource<Right>(this.user.rights.sort(this.compare));
+        this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)).sort(this.compare));
+        this.selectionUsersRights.clear();
+        this.selection.clear();
       },error => {
         this.editError = error.json().warning;
       });
