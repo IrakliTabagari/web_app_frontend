@@ -94,6 +94,9 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
         this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)).sort(this.compare));
         this.selectionUsersRights.clear();
         this.selection.clear();
+        if(this.user.userName === JSON.parse(window.localStorage.getItem('AppSession')).user.userName){
+          window.localStorage.removeItem('AppSession');
+        }
       },error => {
         this.editError = error.json().warning;
       });
@@ -163,4 +166,10 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
       return 1;
     return 0;
   }
+
+
+  resetPassword(){
+
+  }
+
 }

@@ -55,4 +55,12 @@ export class UsersService {
     return this.http.delete(this.url+'/'+id, this.httpOptions);
   }
 
+  activateUser(newUser: User){
+    return this.http.post(this.url+'/activate', newUser, this.httpOptions);
+  }
+
+  resetPassword(newUser: User){
+    return this.http.post(this.url+'/resetPassword', newUser, this.httpOptions);
+  }
+
 }

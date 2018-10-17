@@ -21,7 +21,7 @@
                 <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
                 <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>  
-            <!-- <p></p>   -->
+            <p></p>  
             <mat-form-field>
                 <input 
                     type="password" 
@@ -36,6 +36,7 @@
                 <!-- <mat-error *ngIf="password.hasError('required')">Password must not be empty</mat-error>
                 <mat-error *ngIf="!password.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>
+            <button mat-raised-button color="primary" class="resetButton" (click)="resetPassword()"><mat-icon>sync</mat-icon> Reset</button>
             <p></p>  
             <mat-form-field>
                 <input 

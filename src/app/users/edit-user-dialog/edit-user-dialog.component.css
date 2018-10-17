@@ -2,7 +2,7 @@ mat-form-field{
     width: 300px
 }
 mat-toolbar, mat-dialog-content{
-    width: 500px
+    width: 700px
 }
 .mat-form-field-placeholder {
     display:block !important;
@@ -19,12 +19,17 @@ td {
   }
 
 .rightButton{
-    width: 220px
+    width: 200px
 }
 
 table {
-    width: 220px
+    width: 300px
 }
+
+.resetButton{
+    margin-left:10px;
+}
+
 /* .login-Form{
     width: 320px
 } */

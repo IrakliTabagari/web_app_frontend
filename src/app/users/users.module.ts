@@ -9,6 +9,7 @@ import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.compon
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
+import { ActivateUserDialogComponent } from './activate-user-dialog/activate-user-dialog.component';
 import { UsersService } from './users.service';
 
 import { FormsModule }   from '@angular/forms';
@@ -26,6 +27,7 @@ import { FormsModule }   from '@angular/forms';
     AddUserDialogComponent, 
     DeleteUserDialogComponent,
     EditUserDialogComponent,
+    ActivateUserDialogComponent,
     StatusSnackbarComponent
   ],
   declarations: [
@@ -33,6 +35,7 @@ import { FormsModule }   from '@angular/forms';
     AddUserDialogComponent,
     DeleteUserDialogComponent,
     EditUserDialogComponent,
+    ActivateUserDialogComponent,
     StatusSnackbarComponent
   ],
   providers:[

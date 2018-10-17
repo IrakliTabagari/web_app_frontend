@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {Router} from "@angular/router";
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
@@ -15,6 +16,7 @@ import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.compon
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
+import { ActivateUserDialogComponent } from './activate-user-dialog/activate-user-dialog.component';
 
 // export interface UserData {
 //   id: string;
@@ -38,7 +40,7 @@ import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.compo
 export class UsersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['userName', 'status', 'email', 'edit', 'delete'];
+  displayedColumns: string[] = ['userName', 'status', 'email', 'edit', 'delete', 'activate'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,7 +48,8 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UsersService, 
               public dialog: MatDialog, 
-              public snackBar: MatSnackBar
+              public snackBar: MatSnackBar,
+              private router: Router
               ) {
   }
 
@@ -98,6 +101,11 @@ export class UsersComponent implements OnInit {
       .subscribe(result => {
         this.newUser = dialogRef.componentInstance.user; //result;//.json();
         if(this.newUser._id && this.newUser._id !== ""){
+          if(!JSON.parse(window.localStorage.getItem('AppSession'))
+            || this.newUser.userName === JSON.parse(window.localStorage.getItem('AppSession')).user.userName){
+            window.localStorage.removeItem('AppSession');
+            this.router.navigate(['/login']);
+          }
           this.refreshUsers(); 
         }
         console.log(`Dialog result: ${this.newUser}`);
@@ -118,6 +126,26 @@ export class UsersComponent implements OnInit {
           .subscribe(response => {
             this.deletedUser = response.json();
             this.openSnackBar(`${this.deletedUser.userName} was deleted`);            
+            this.refreshUsers(); 
+          });
+        }       
+      });
+  }
+
+  activatedUser:User;
+  activateUserDialog(userId) {
+    this.activatedUser = this.users.find(obj => obj._id == userId);;
+    const dialogRef = this.dialog.open(ActivateUserDialogComponent);
+    console.log(`Selected User: ${this.activatedUser._id}`);
+    dialogRef.componentInstance.userName = this.activatedUser.userName;
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if(result == true){
+          this.userService.activateUser(this.activatedUser)
+          .subscribe(response => {
+            this.activatedUser = response.json();
+            this.openSnackBar(`${this.activatedUser.userName} was deleted`);            
             this.refreshUsers(); 
           });
         }       

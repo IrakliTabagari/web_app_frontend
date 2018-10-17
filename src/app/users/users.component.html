@@ -58,10 +58,19 @@
       <ng-container matColumnDef="delete">
           <th class="content-delete" mat-header-cell *matHeaderCellDef> delete </th>
           <td class="content-delete" mat-cell *matCellDef="let row">
-            <button [disabled]="!rights || !rights.includes('deleteUser')" mat-icon-button color="primary" (click)="deleteUserDialog(row._id)">
+            <button [disabled]="!rights || !rights.includes('deleteUser') || row.state.name =='Inactive'" mat-icon-button color="primary" (click)="deleteUserDialog(row._id)">
               <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
             </button>
           </td>
+      </ng-container>
+
+        <ng-container matColumnDef="activate">
+            <th class="content-activate" mat-header-cell *matHeaderCellDef> activate </th>
+            <td class="content-activate" mat-cell *matCellDef="let row">
+              <button [disabled]="!rights || !rights.includes('activateUser') || row.state.name =='Active'" mat-icon-button color="primary" (click)="activateUserDialog(row._id)">
+                <mat-icon aria-label="Example icon-button with a heart icon">restore</mat-icon>
+              </button>
+            </td>
         </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
