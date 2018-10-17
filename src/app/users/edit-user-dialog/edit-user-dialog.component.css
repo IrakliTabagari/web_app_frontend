@@ -1,11 +1,30 @@
 mat-form-field{
     width: 300px
 }
-
+mat-toolbar, mat-dialog-content{
+    width: 500px
+}
 .mat-form-field-placeholder {
     display:block !important;
 }
 
+th,td {
+    padding:5px;
+  }
+  
+td {
+    padding:5px;
+    vertical-align: top;
+    text-align: left;
+  }
+
+.rightButton{
+    width: 120px
+}
+
+table {
+    width: 220px
+}
 /* .login-Form{
     width: 320px
 } */

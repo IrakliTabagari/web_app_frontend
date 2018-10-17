@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
+//import { Observable } from 'rxjs/Observable';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';

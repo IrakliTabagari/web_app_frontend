@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Http } from '@angular/http';
 import { Headers } from '@angular/http';
+// import {Observable} from 'rxjs/Observable';
+// import 'rxjs/add/operator/map';
 
 import { Session } from '../auth/login/session';
 import { User } from '../auth/login/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,7 @@ import { User } from '../auth/login/user';
 export class UsersService {
 
   private url = "http://localhost:3000/api/users";
+  private rightsUrl = "http://localhost:3000/api/userRights";
   session: Session = JSON.parse(window.localStorage.getItem('AppSession'));
   users: User[];
   httpOptions = {
@@ -27,6 +31,14 @@ export class UsersService {
     return this.http.get(this.url, this.httpOptions);
   }
 
+  getAllRights(){
+    return this.http.get(this.rightsUrl, this.httpOptions);
+  }
+
+  updateUserRights(editedUser: User){
+    return this.http.put(this.rightsUrl+'/'+editedUser._id, editedUser, this.httpOptions);
+  }
+
   getUser(id: String){
     return this.http.get(this.url+'/'+id, this.httpOptions);
   }
@@ -36,7 +48,7 @@ export class UsersService {
   }
 
   updatetUser(editedUser: User){
-    return this.http.put(this.url, editedUser, this.httpOptions);
+    return this.http.put(this.url+'/'+editedUser._id, editedUser, this.httpOptions);
   }
 
   deleteUser(id: String){

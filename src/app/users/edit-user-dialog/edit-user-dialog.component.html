@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">   
     <mat-toolbar-row>
-        <h2 mat-dialog-title>add new User</h2>
+        <h2 mat-dialog-title>Edit User</h2>
     </mat-toolbar-row> 
 </mat-toolbar>
 <mat-dialog-content>
@@ -13,26 +13,28 @@
                     matInput 
                     placeholder="UserName" 
                     ngModel 
-                    name="newUserUserName"
-                    #userName="ngModel"
+                    name="userName"
+                    [value]="userName"
                     required
-                    minlength="5">
-                <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
-                <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error>
+                    minlength="5"
+                    disabled>
+                <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>  
-            <p></p>  
+            <!-- <p></p>   -->
             <mat-form-field>
                 <input 
                     type="password" 
                     matInput 
                     placeholder="Password" 
                     ngModel 
-                    name="newUserPassword"
-                    #password="ngModel"
+                    name="password"
+                    [value]="password"
                     required
-                    minlength="5">
-                <mat-error *ngIf="password.hasError('required')">Password must not be empty</mat-error>
-                <mat-error *ngIf="!password.hasError('required')">Should be at least 5 characters long</mat-error>
+                    minlength="5"
+                    disabled>
+                <!-- <mat-error *ngIf="password.hasError('required')">Password must not be empty</mat-error>
+                <mat-error *ngIf="!password.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>
             <p></p>  
             <mat-form-field>
@@ -41,18 +43,101 @@
                     matInput 
                     placeholder="email" 
                     ngModel 
-                    name="newUserEmail"
-                    #email="ngModel"
+                    name="email"
+                    [(ngModel)]="email"
                     required
                     minlength="5">
-                <mat-error *ngIf="email.hasError('required')">Password must not be empty</mat-error>
-                <mat-error *ngIf="!email.hasError('required')">Should be at least 5 characters long</mat-error>
+                <!-- <mat-error *ngIf="email.hasError('required')">Password must not be empty</mat-error>
+                <mat-error *ngIf="!email.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>
             <p></p> 
-            <button type="submit" mat-raised-button color="primary"><mat-icon>how_to_reg</mat-icon> Create</button>
-            <mat-error *ngIf="loginStatus">{{loginStatus}}</mat-error>
+            <button type="submit" mat-raised-button color="primary"><mat-icon>done_outline</mat-icon> Update</button>
+            <p></p> 
+            <mat-error *ngIf="editError">{{editError}}</mat-error>
+            <mat-hint *ngIf="editSuccess">{{editSuccess}}</mat-hint>
         </form>
     </section>
+
+
+    <section>
+        <table>
+            <tr>
+                <th>
+                    <button mat-raised-button class="rightButton" color="primary" (click)="addRights()"><mat-icon>arrow_forward_ios</mat-icon> Add</button>
+                </th>
+                <th>
+                    <button mat-raised-button class="rightButton" color="primary" (click)="removeRights()"><mat-icon>arrow_back_ios</mat-icon> Remove</button>
+                </th>
+                </tr>
+            <tr>
+                <td>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>                    
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element" 
+                matTooltip="{{element.description}}"
+                matTooltipPosition="left"> {{element.name}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+          </table>
+        </td>
+            <td>
+          <table mat-table [dataSource]="usersRights" class="mat-elevation-z8">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterUsersRightsToggle() : null"
+                              [checked]="selectionUsersRights.hasValue() && isAllUsersRightsSelected()"
+                              [indeterminate]="selectionUsersRights.hasValue() && !isAllUsersRightsSelected()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selectionUsersRights.toggle(row) : null"
+                              [checked]="selectionUsersRights.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>                    
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element" 
+                matTooltip="{{element.description}}"
+                matTooltipPosition="left"> {{element.name}} </td>
+            </ng-container>
+                      
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selectionUsersRights.toggle(row)">
+            </tr>
+        
+          </table>
+        </td>
+    </tr>
+        </table>
+    </section>
+
+
 </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
