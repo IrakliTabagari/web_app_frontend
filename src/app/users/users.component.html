@@ -68,7 +68,7 @@
             <th class="content-activate" mat-header-cell *matHeaderCellDef> activate </th>
             <td class="content-activate" mat-cell *matCellDef="let row">
               <button [disabled]="!rights || !rights.includes('activateUser') || row.state.name =='Active'" mat-icon-button color="primary" (click)="activateUserDialog(row._id)">
-                <mat-icon aria-label="Example icon-button with a heart icon">restore</mat-icon>
+                <mat-icon aria-label="Example icon-button with a heart icon">autorenew</mat-icon>
               </button>
             </td>
         </ng-container>

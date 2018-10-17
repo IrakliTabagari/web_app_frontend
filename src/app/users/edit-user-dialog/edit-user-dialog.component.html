@@ -36,8 +36,51 @@
                 <!-- <mat-error *ngIf="password.hasError('required')">Password must not be empty</mat-error>
                 <mat-error *ngIf="!password.hasError('required')">Should be at least 5 characters long</mat-error> -->
             </mat-form-field>
-            <button mat-raised-button color="primary" class="resetButton" (click)="resetPassword()"><mat-icon>sync</mat-icon> Reset</button>
-            <p></p>  
+            <button mat-raised-button color="primary" class="resetButton" (click)="showResetDialog()"><mat-icon>sync</mat-icon> Reset Password</button>
+            <p  *ngIf="showResetPassword"></p>  
+            <mat-card  *ngIf="showResetPassword">
+            <mat-form-field>
+                    <input 
+                        type="password" 
+                        matInput 
+                        placeholder="newPassword1" 
+                        ngModel 
+                        name="newPassword1"
+                        [(ngModel)]="newPassword1"
+                        required
+                        minlength="5"
+                        (keyup)="onKey($event)">
+                    <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                    <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
+                </mat-form-field>  
+                <mat-error *ngIf="newPassword1.length==0">must not be empty</mat-error>
+                <mat-error *ngIf="newPassword1.length>0 && newPassword1.length<5">Should be at least 5 characters long</mat-error>
+                <p></p>  
+                <mat-form-field  *ngIf="showResetPassword">
+                        <input 
+                            type="password" 
+                            matInput 
+                            placeholder="newPassword2" 
+                            ngModel 
+                            name="newPassword2"
+                            [(ngModel)]="newPassword2"
+                            required
+                            minlength="5"
+                            (keyup)="onKey($event)">
+                        <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                        <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
+                </mat-form-field>  
+                <mat-error *ngIf="newPassword2.length==0">must not be empty</mat-error>
+                <mat-error *ngIf="newPassword2.length>0 && newPassword2.length<5">Should be at least 5 characters long</mat-error>
+                <p></p>
+                <button mat-raised-button color="primary" 
+                    class="resetButton" 
+                    (click)="resetPassword()"
+                    [disabled]="!resetButton">
+                    <mat-icon>sync</mat-icon> Reset
+                </button>
+                </mat-card>
+                <p></p>  
             <mat-form-field>
                 <input 
                     type="email" 

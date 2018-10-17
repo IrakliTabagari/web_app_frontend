@@ -18,19 +18,6 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
 import { StatusSnackbarComponent } from './status-snackbar/status-snackbar.component';
 import { ActivateUserDialogComponent } from './activate-user-dialog/activate-user-dialog.component';
 
-// export interface UserData {
-//   id: string;
-//   name: string;
-//   progress: string;
-//   color: string;
-// }
-
-// /** Constants used to fill up our data base. */
-// const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-//   'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-// const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-//   'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-//   'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
 @Component({
   selector: 'app-users',
@@ -145,7 +132,7 @@ export class UsersComponent implements OnInit {
           this.userService.activateUser(this.activatedUser)
           .subscribe(response => {
             this.activatedUser = response.json();
-            this.openSnackBar(`${this.activatedUser.userName} was deleted`);            
+            this.openSnackBar(`${this.activatedUser.userName} was activated`);            
             this.refreshUsers(); 
           });
         }       

@@ -167,9 +167,45 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
     return 0;
   }
 
+  showResetPassword: Boolean;
+  showResetDialog(){
+    this.showResetPassword = !this.showResetPassword;
 
+  }
+
+  newPassword1: String = "";
+  newPassword2: String = "";
+  passwordReseted: Boolean;
+  resetButton: Boolean;
   resetPassword(){
+    if(this.newPassword1 != ""
+      && this.newPassword1.length>=5
+      && this.newPassword2 != ""
+      && this.newPassword2.length>=5
+      && this.newPassword1 == this.newPassword2      
+      ){
+        this.user.password = this.newPassword1;
+        this.userService.resetPassword(this.user)
+          .subscribe(response => {
+            this.user = response.json();
+          });
+        this.resetButton = true;
+    }else {
+      this.resetButton = false;
+    }
 
+  }
+  onKey(event: any){
+    if(this.newPassword1 != ""
+      && this.newPassword1.length>=5
+      && this.newPassword2 != ""
+      && this.newPassword2.length>=5
+      && this.newPassword1 == this.newPassword2      
+      ){
+        this.resetButton = true;
+    }else {
+      this.resetButton = false;
+    }
   }
 
 }
