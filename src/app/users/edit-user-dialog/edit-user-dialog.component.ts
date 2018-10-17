@@ -51,15 +51,14 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
         this.userName = this.user.userName;
         this.password = this.user.password;
         this.email = this.user.email;
-        this.usersRights = new MatTableDataSource<Right>(this.user.rights);     
+        this.usersRights = new MatTableDataSource<Right>(this.user.rights.sort(this.compare));     
       });
 
       this.userService.getAllRights()
         .subscribe(response => {
-        this.allRights = response.json();
-        console.log(this.allRights);
+        this.allRights = response.json().sort(this.compare);
 
-        this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)));
+        this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)).sort(this.compare));
         
         //this.selection = new SelectionModel<Right>(true, []);     
       });
@@ -122,18 +121,34 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
   }
 
   addRights(){
-
-
+    //console.log(this.allRights.filter(right => !this.selection.selected.some(r => r.name===right.name)));
+    this.user.rights = this.user.rights.concat(this.selection.selected).sort(this.compare) as [Right];
+    this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)).sort(this.compare));
+    //this.user.rights = this.allRights.filter(right => !this.dataSource.some(r => r.name=== right.name)) as [Right];
+    
+    this.usersRights = new MatTableDataSource<Right>(this.user.rights);  
+    this.selectionUsersRights.clear();
+    this.selection.clear();
+    
+    //this.dataSource.clear();
+    
   }
 
   removeRights(){
-    console.log(this.user.rights.filter(right => !this.selectionUsersRights.selected.some(r => r.name=== right.name)) as [Right]);
-    this.user.rights = this.user.rights.filter(right => !this.selectionUsersRights.selected.some(r => r.name=== right.name)) as [Right];
+    this.user.rights = this.user.rights.filter(right => !this.selectionUsersRights.selected.some(r => r.name=== right.name)).sort(this.compare) as [Right];
     this.usersRights = new MatTableDataSource<Right>(this.user.rights);  
     this.selectionUsersRights.clear();
-
-    console.log(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)));
+    this.selection.clear();
+    
     //this.dataSource.clear();
-    this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)));
+    this.dataSource = new MatTableDataSource<Right>(this.allRights.filter(right => !this.user.rights.some(r => r.name===right.name)).sort(this.compare));
+  }
+
+  compare(a,b) {
+    if (a.name < b.name)
+      return -1;
+    if (a.name > b.name)
+      return 1;
+    return 0;
   }
 }
