@@ -173,7 +173,8 @@ import {MatSnackBar} from '@angular/material';
   showResetPassword: Boolean;
   showResetDialog(){
     this.showResetPassword = !this.showResetPassword;
-
+    this.newPassword1 = "";
+    this.newPassword2 = "";
   }
 
   newPassword1: String = "";
