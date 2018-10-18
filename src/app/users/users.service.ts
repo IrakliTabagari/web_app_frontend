@@ -44,6 +44,10 @@ export class UsersService {
   }
 
   addUser(newUser: User){
+    delete newUser._id;
+    delete newUser.state;
+    delete newUser.rights;
+    delete newUser.__v;
     return this.http.post(this.url, newUser, this.httpOptions);
   }
 

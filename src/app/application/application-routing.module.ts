@@ -5,12 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ApplicationComponent } from './application.component'
 import { UsersComponent } from '../users/users.component'
 import { UsersModule } from '../users/users.module'
+import { ProfileModule } from '../profile/profile.module'
 
 const routes: Routes =[
     {   
         path: '', component: ApplicationComponent,
         children: [
-            { path: 'users', loadChildren: () => UsersModule }
+            { path: 'users', loadChildren: () => UsersModule },
+            { path: 'profile', loadChildren: () => ProfileModule }
         ]
     }
 ];

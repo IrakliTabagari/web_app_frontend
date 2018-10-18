@@ -21,6 +21,7 @@ import { ApplicationModule } from './application/application.module';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [

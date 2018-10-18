@@ -27,7 +27,7 @@ import { ActivateUserDialogComponent } from './activate-user-dialog/activate-use
 export class UsersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['userName', 'status', 'email', 'edit', 'delete', 'activate'];
+  displayedColumns: string[] = ['userName', 'state', 'email', 'edit', 'delete', 'activate'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -10,7 +10,8 @@ import { Session } from '../../auth/login/session';
 import { User } from '../../auth/login/user';
 import { UsersService } from '../users.service';
 
-
+import { StatusSnackbarComponent } from '../status-snackbar/status-snackbar.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'dialog-content-example-dialog',
@@ -23,7 +24,8 @@ import { UsersService } from '../users.service';
     newUserPassword2: String = "";
     newUserEmail: String = "";
 
-    constructor(private userService: UsersService){
+    constructor(private userService: UsersService,
+                public snackBar: MatSnackBar){
 
     }
 
@@ -52,6 +54,7 @@ import { UsersService } from '../users.service';
         console.log(this.newUser);
         this.addError = "";
         this.addSuccess = this.newUser.userName.toString() + " was added succesfully";
+        this.openSnackBar(`${this.newUser.userName} was added succesfully`);
       },error => {
         this.addError = error.json().warning;
       });
@@ -77,5 +80,12 @@ import { UsersService } from '../users.service';
         this.showAddButton = false;
         if(this.newUserPassword1 !== this.newUserPassword2  ) this.matchError = true;
       }
+    }
+
+    openSnackBar(message: string) {
+      this.snackBar.openFromComponent(StatusSnackbarComponent, {
+        data: message,
+        duration: 2000,
+      });
     }
   }

@@ -25,7 +25,7 @@ import {MatSnackBar} from '@angular/material';
   export class EditUserDialogComponent implements AfterContentChecked, OnInit  {
  
     constructor(private userService: UsersService,
-                public snackBar: MatSnackBar,){
+                public snackBar: MatSnackBar){
 
     }
 

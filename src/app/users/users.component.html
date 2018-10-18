@@ -35,7 +35,7 @@
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="status">
+      <ng-container matColumnDef="state">
         <th class="content-th" mat-header-cell *matHeaderCellDef mat-sort-header> state </th>
         <td class="content-td" [ngClass]="{'inactive': row.state.name == 'Inactive'}" mat-cell *matCellDef="let row"> {{row.state.name}} </td>
       </ng-container>
