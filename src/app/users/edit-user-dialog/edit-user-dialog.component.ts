@@ -13,6 +13,8 @@ import { Right }  from '../../auth/login/right';
 import { UsersService } from '../users.service';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
+import { StatusSnackbarComponent } from '../status-snackbar/status-snackbar.component';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -22,7 +24,8 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
   })
   export class EditUserDialogComponent implements AfterContentChecked, OnInit  {
  
-    constructor(private userService: UsersService){
+    constructor(private userService: UsersService,
+                public snackBar: MatSnackBar,){
 
     }
 
@@ -188,6 +191,7 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
         this.userService.resetPassword(this.user)
           .subscribe(response => {
             this.user = response.json();
+            this.openSnackBar(`${this.user.userName}'s password was reseted`);
           });
         this.resetButton = true;
     }else {
@@ -195,6 +199,9 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
     }
 
   }
+
+  
+  matchError: Boolean = false;
   onKey(event: any){
     if(this.newPassword1 != ""
       && this.newPassword1.length>=5
@@ -202,10 +209,19 @@ import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_di
       && this.newPassword2.length>=5
       && this.newPassword1 == this.newPassword2      
       ){
+        this.matchError = false;
         this.resetButton = true;
     }else {
       this.resetButton = false;
+      if(this.newPassword1 !== this.newPassword2  ) this.matchError = true;
     }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.openFromComponent(StatusSnackbarComponent, {
+      data: message,
+      duration: 2000,
+    });
   }
 
 }

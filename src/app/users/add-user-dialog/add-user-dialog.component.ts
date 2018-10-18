@@ -18,7 +18,11 @@ import { UsersService } from '../users.service';
     styleUrls: ['add-user-dialog.component.css']
   })
   export class AddUserDialogComponent {
-  
+    newUserUserName: String = "";
+    newUserPassword1: String = "";
+    newUserPassword2: String = "";
+    newUserEmail: String = "";
+
     constructor(private userService: UsersService){
 
     }
@@ -36,10 +40,10 @@ import { UsersService } from '../users.service';
   
     addError:String;
     addSuccess:String;
-    onSubmit(form: NgForm){
-      this.newUser.userName = form.value.newUserUserName;
-      this.newUser.password = form.value.newUserPassword;
-      this.newUser.email = form.value.newUserEmail;
+    addUser(){
+      this.newUser.userName = this.newUserUserName;
+      this.newUser.password = this.newUserPassword1;
+      this.newUser.email = this.newUserEmail;
       console.log(this.newUser);
       
       this.userService.addUser(this.newUser)
@@ -51,5 +55,27 @@ import { UsersService } from '../users.service';
       },error => {
         this.addError = error.json().warning;
       });
+    }
+
+    
+    showAddButton: Boolean;
+    matchError: Boolean = false;
+    onKey(event: any){
+      if(this.newUserUserName  != ""
+        && this.newUserUserName.length>=5
+        && this.newUserPassword1 != ""
+        && this.newUserPassword1.length>=5
+        && this.newUserPassword2 != ""
+        && this.newUserPassword2.length>=5
+        && this.newUserPassword1 == this.newUserPassword2  
+        && this.newUserPassword2 != ""
+        && this.newUserEmail.length>=5  
+        ){
+          this.matchError = false;
+          this.showAddButton = true;
+      }else {
+        this.showAddButton = false;
+        if(this.newUserPassword1 !== this.newUserPassword2  ) this.matchError = true;
+      }
     }
   }
