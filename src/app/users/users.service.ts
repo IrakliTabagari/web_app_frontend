@@ -67,4 +67,8 @@ export class UsersService {
     return this.http.post(this.url+'/resetPassword', newUser, this.httpOptions);
   }
 
+  changePassword(newUser: any){
+    return this.http.post(this.url+'/changePassword', newUser, this.httpOptions);
+  }
+
 }

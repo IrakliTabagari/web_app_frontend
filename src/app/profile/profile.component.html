@@ -1,5 +1,72 @@
-<mat-card>
-  <p>
-    profile works!
-  </p>
-</mat-card>
+<div class="main-div">
+    <mat-card class="z-depth center" flex="50">
+        <section class="login-form">
+            <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm">
+
+                <mat-form-field>
+                    <input matInput placeholder="userName" value="{{session.user.userName}}" disabled>
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                    <input type="password" matInput placeholder="password" value="test" disabled>
+                    <button mat-raised-button matSuffix color="primary" (click)="showChangePassword()">
+                        <mat-icon>refresh</mat-icon>
+                        Change
+                    </button>
+                </mat-form-field>
+
+                <p *ngIf="showResetPassword"></p>
+                <mat-card *ngIf="showResetPassword">
+                    <mat-form-field>
+                            <input type="password" matInput placeholder="Current Password" ngModel name="oldPassword"
+                                [(ngModel)]="oldPassword" required minlength="5" (keyup)="onKey($event)">
+                            <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                    <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
+                        </mat-form-field>
+                        <mat-error *ngIf="oldPassword.length==0">must not be empty</mat-error>
+                        <mat-error *ngIf="oldPassword.length>0 && oldPassword.length<5">Should be at least 5 characters
+                            long</mat-error>
+                        <p></p>
+                    <mat-form-field>
+                        <input type="password" matInput placeholder="New Password" ngModel name="newPassword1"
+                            [(ngModel)]="newPassword1" required minlength="5" (keyup)="onKey($event)">
+                        <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
+                    </mat-form-field>
+                    <mat-error *ngIf="newPassword1.length==0">must not be empty</mat-error>
+                    <mat-error *ngIf="newPassword1.length>0 && newPassword1.length<5">Should be at least 5 characters
+                        long</mat-error>
+                    <p></p>
+                    <mat-form-field *ngIf="showResetPassword">
+                        <input type="password" matInput placeholder="Retype New Password" ngModel name="newPassword2"
+                            [(ngModel)]="newPassword2" required minlength="5" (keyup)="onKey($event)">
+                        <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
+                <mat-error *ngIf="!userName.hasError('required')">Should be at least 5 characters long</mat-error> -->
+                    </mat-form-field>
+                    <mat-error *ngIf="newPassword2.length==0">must not be empty</mat-error>
+                    <mat-error *ngIf="newPassword2.length>0 && newPassword2.length<5">Should be at least 5 characters
+                        long</mat-error>
+                    <br>
+                    <mat-hint *ngIf="matchError">Passwords does not match</mat-hint>
+                    <p></p>
+                    <button mat-raised-button color="primary" class="resetButton" (click)="changePassword()" [disabled]="!resetButton">
+                        <mat-icon>sync</mat-icon> Reset
+                    </button>
+                </mat-card>
+
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="email" value="{{session.user.email}}">
+                </mat-form-field>
+                <br>
+                <p></p>
+                <button mat-raised-button color="primary" (click)="updateUser()">
+                    <mat-icon>done_outline</mat-icon> Update
+                </button>
+
+            </form>
+        </section>
+    </mat-card>
+</div>
