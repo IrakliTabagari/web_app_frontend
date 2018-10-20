@@ -23,17 +23,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileModule } from './profile/profile.module';
 
+//import { SharedModule} from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
-    //HeaderComponent,
-    //SidemenuComponent,
-    //MainmenuComponent,
-    LoginComponent//,
-    //UsersComponent,
-    //SidenavComponent,
-    //HeaderComponent,
-    //FooterComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +45,13 @@ import { ProfileModule } from './profile/profile.module';
     FormsModule,
     ReactiveFormsModule,
     ApplicationModule,
-    HttpModule
+    HttpModule,
+   // SharedModule
   ],
   exports:[
-    //MatButtonModule,
-    //MatCheckboxModule
+
+  ],
+  entryComponents: [
   ],
   providers: [],
   bootstrap: [AppComponent]

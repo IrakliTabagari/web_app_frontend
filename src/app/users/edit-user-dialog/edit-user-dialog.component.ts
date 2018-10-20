@@ -13,7 +13,7 @@ import { Right }  from '../../auth/login/right';
 import { UsersService } from '../users.service';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
-import { StatusSnackbarComponent } from '../status-snackbar/status-snackbar.component';
+import { StatusSnackbarComponent } from '../../shared/status-snackbar/status-snackbar.component';
 import {MatSnackBar} from '@angular/material';
 
 

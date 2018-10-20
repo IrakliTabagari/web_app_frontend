@@ -4,7 +4,7 @@ import { User } from '../auth/login/user';
 import { Session } from '../auth/login/session'
 import { UsersService } from '../users/users.service';
 
-import { StatusSnackbarComponent } from '../users/status-snackbar/status-snackbar.component';
+import { StatusSnackbarComponent} from '../shared/status-snackbar/status-snackbar.component';
 import {MatSnackBar} from '@angular/material';
 
 @Component({

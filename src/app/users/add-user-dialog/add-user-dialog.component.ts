@@ -10,7 +10,7 @@ import { Session } from '../../auth/login/session';
 import { User } from '../../auth/login/user';
 import { UsersService } from '../users.service';
 
-import { StatusSnackbarComponent } from '../status-snackbar/status-snackbar.component';
+import { StatusSnackbarComponent } from '../../shared/status-snackbar/status-snackbar.component';
 import {MatSnackBar} from '@angular/material';
 
 @Component({

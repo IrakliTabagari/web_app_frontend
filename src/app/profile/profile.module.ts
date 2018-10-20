@@ -5,21 +5,22 @@ import { ProfileComponent } from './profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { FormsModule }   from '@angular/forms';
 
-import { StatusSnackbarComponent } from '../users/status-snackbar/status-snackbar.component'
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ProfileRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   entryComponents: [
-    StatusSnackbarComponent
+   // ProfileStatusSnackbarComponent
   ],
   declarations: [
     ProfileComponent,
-    StatusSnackbarComponent
+   // ProfileStatusSnackbarComponent
   ]
 })
 export class ProfileModule { }

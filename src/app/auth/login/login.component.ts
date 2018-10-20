@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     
     this.http.post("http://localhost:3000/api/users/login", this.login, this.httpOptions)
       .subscribe(response => {
+        window.localStorage.removeItem('AppSession');
         this.newSession = response.json();        
         console.log(this.newSession);
         window.localStorage.setItem('AppSession',  JSON.stringify(this.newSession))
