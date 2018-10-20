@@ -17,8 +17,8 @@
                     </button>
                 </mat-form-field>
 
-                <p *ngIf="showResetPassword"></p>
-                <mat-card *ngIf="showResetPassword">
+                <p *ngIf="showResetPassword">
+                <mat-card>
                     <mat-form-field>
                             <input type="password" matInput placeholder="Current Password" ngModel name="oldPassword"
                                 [(ngModel)]="oldPassword" required minlength="5" (keyup)="onKey($event)">
@@ -39,7 +39,7 @@
                     <mat-error *ngIf="newPassword1.length>0 && newPassword1.length<5">Should be at least 5 characters
                         long</mat-error>
                     <p></p>
-                    <mat-form-field *ngIf="showResetPassword">
+                    <mat-form-field>
                         <input type="password" matInput placeholder="Retype New Password" ngModel name="newPassword2"
                             [(ngModel)]="newPassword2" required minlength="5" (keyup)="onKey($event)">
                         <!-- <mat-error *ngIf="userName.hasError('required')">UserName must not be empty</mat-error>
@@ -55,6 +55,7 @@
                         <mat-icon>sync</mat-icon> Reset
                     </button>
                 </mat-card>
+                </p>
 
                 <br>
                 <mat-form-field>
